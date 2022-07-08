@@ -1,0 +1,18 @@
+.expense-item{
+    max-width: fit-content;
+    padding: 20px;
+    margin: 20px;
+    background: green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.expense-item__description{
+    margin: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.expense-item__price{
+    margin: 20px;
+}
