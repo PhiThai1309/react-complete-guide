@@ -1,24 +1,34 @@
 import "./ExpenseItem.css";
 import React, { useState } from "react";
+import Expense from "./NewExpense/Expense";
+import ExpenseFilter from "./NewExpense/ExpenseFilter";
 
 function ExpenseItem(props) {
-  // const { item } = props;
-  // const { title, amount, date } = item;
-  const [label, setLabel] = useState(props.title);
+  const { item } = props;
 
-  const clickHandler = () => {
-    setLabel("Updated!");
-    console.log(label);
+  const [filterValue, setChoosenValue] = useState("2019");
+
+  const choosenValue = (value) => {
+    setChoosenValue(value);
   };
+
+  const filterArray = item.filter((value) => {
+    return value.date.getFullYear().toString() === filterValue;
+  });
+
   return (
-    <div className="expense-item">
-      <div>{props.date.toISOString()}</div>
-      <div className="expense-item__description">
-        <h2>{label}</h2>
-        <div className="expense-item__price">{props.amount}</div>
-      </div>
-      <button onClick={clickHandler}>Change title</button>
-    </div>
+    <>
+      <ExpenseFilter selected={filterValue} value={choosenValue} />
+      {filterArray.map((obj) => (
+        // const year = obj.date.getFullYear()
+        <Expense
+          key={obj.id}
+          title={obj.title}
+          date={obj.date}
+          amount={obj.amount}
+        />
+      ))}
+    </>
   );
 }
 
